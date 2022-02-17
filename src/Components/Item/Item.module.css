@@ -1,0 +1,36 @@
+.wrapper {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem 1rem;
+    width: 350px;
+    text-align: center;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.wrapper img {
+    display: inline-block;
+    height: 351px;
+    object-fit: fill;
+    object-position: center;
+    box-shadow: var(--shadow);
+}
+
+.itemBody {
+    line-height: 23px;
+}
+
+.itemBody h3 {
+    text-align: center;
+}
+
+.itemBody p {
+    margin-bottom: 5px;
+    font-weight: var(--fw-bold);
+}
+
+.itemBody p span {
+    font-weight: var(--fw-light);
+}

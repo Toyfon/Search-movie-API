@@ -1,0 +1,37 @@
+
+.paginator {
+    margin: 10px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.pages {
+    display: inherit;
+    justify-content: space-around;
+    width: 240px;
+    align-items: center;
+}
+
+.pages span {
+    width: 20px;
+    height: 22px;
+}
+.pages  img {
+    width: 20px;
+    height: 20px;
+
+}
+
+.pageNumber {
+    padding: 2px;
+    color: rgba(112, 127, 132, 0.53);
+}
+
+.selectedPage {
+    font-weight: bold;
+    color: #000;
+}
+
+
+

@@ -1,0 +1,23 @@
+.wrapper {
+    width: 100%;
+    padding: 20px 16px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+@media (min-width: 767px) {
+    .wrapper {
+        /*grid-template-columns: repeat(2, 1fr);*/
+        /*gap: 3rem;*/
+        /*padding: 40px 16px;*/
+    }
+}
+
+@media (max-width: 1024px) {
+    .wrapper {
+        justify-content: space-around;
+    }
+}

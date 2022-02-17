@@ -3,7 +3,7 @@ import React, {FC} from "react"
 import {MovieType} from "../../api/api"
 import {SearchInfo} from "../SearchInfo/SearchInfo"
 import {MainContent} from "../MainContent/MainContent"
-import s from './Main.module.css'
+
 
 
 type PropsType = {
@@ -20,7 +20,7 @@ type PropsType = {
 export const Main: FC<PropsType> = React.memo((props) => {
         const {setCurrentPage, value, currentPage, movieTotalCount, showResultByTitle, movies, error,} = props
 
-        return (<div className={s.wrapper}>
+        return (<div>
                 <div className='container'>
                     <SearchInfo value={value} movieTotalCount={movieTotalCount} movies={movies}/>
                     {!error &&

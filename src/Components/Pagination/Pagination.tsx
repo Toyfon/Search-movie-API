@@ -47,7 +47,7 @@ export const Pagination: FC<Props> = (props) => {
     const onChangeCurrentPage = useCallback((page: number) => {
         setCurrentPage(page)
         showResultByTitle(value, page)
-    },[setCurrentPage,showResultByTitle,value])
+    }, [setCurrentPage, showResultByTitle, value])
 
     const mappedPages = pages.map((el) => (
         <div className={currentPage === el ? s.selectedPage : s.pageNumber}
@@ -58,8 +58,6 @@ export const Pagination: FC<Props> = (props) => {
         </div>
     ));
 
-    console.log(currentPage)
-    console.log(pagesCount)
     return (<>
             {movies.length > 0 &&
             <div className={s.paginator}>

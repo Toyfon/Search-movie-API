@@ -1,11 +1,11 @@
 import React, {FC} from "react"
 
-import {ItemList} from "../ItemList/ItemList"
 import {Pagination} from "../Pagination/Pagination"
 import {MovieType} from "../../api/api"
+import List from "../ItemList/List";
+import {Item} from "../Item/Item";
 
 type PropsType = {
-    error: string | null
     movies: MovieType[]
     movieTotalCount: number
     showResultByTitle: (value: string, page: number) => void
@@ -15,10 +15,12 @@ type PropsType = {
 }
 
 export const MainContent: FC<PropsType> = React.memo((props) => {
-        const {error, movies, value, currentPage, setCurrentPage, movieTotalCount, showResultByTitle} = props
+        const { movies, value, currentPage, setCurrentPage, movieTotalCount, showResultByTitle} = props
 
         return <>
-            <ItemList error={error} movies={movies}/>
+            <List items={movies}
+                  renderItem={(movie: MovieType) => <Item movie={movie} key={movie.Title}
+                  />}/>
             <Pagination
                 movies={movies}
                 movieTotalCount={movieTotalCount}

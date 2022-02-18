@@ -24,8 +24,7 @@ export const Main: FC<PropsType> = React.memo((props) => {
                 <div className='container'>
                     <SearchInfo value={value} movieTotalCount={movieTotalCount} movies={movies}/>
                     {!error &&
-                    <MainContent error={error}
-                                 movies={movies}
+                    <MainContent movies={movies}
                                  movieTotalCount={movieTotalCount}
                                  showResultByTitle={showResultByTitle}
                                  currentPage={currentPage}

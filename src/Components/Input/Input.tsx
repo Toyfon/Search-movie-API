@@ -6,7 +6,6 @@ import {MovieType} from "../../api/api"
 
 type PropsType = {
     callBack: (value: string) => void
-    setError: (error: string | null) => void
     value: string
     setValue: (value: string) => void
     setCurrentPage: (page: number) => void
@@ -15,15 +14,14 @@ type PropsType = {
 }
 
 export const Input: FC<PropsType> = React.memo((props) => {
-        const {callBack, setError, value, setValue, setCurrentPage, setResult,} = props
+        const {callBack, value, setValue, setCurrentPage, setResult,} = props
 
 
         const changeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
             const value = e.currentTarget.value
             setValue(value)
-            setError(null)
             setResult([])
-        }, [setValue, setError, setResult])
+        }, [setValue, setResult])
 
 
         const onKeyPressHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {

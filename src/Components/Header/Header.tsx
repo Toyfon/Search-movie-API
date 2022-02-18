@@ -9,7 +9,6 @@ import {Profile} from "../Profile/Profile"
 
 type PropsType = {
     showResultByTitle: (value: string, page?: number) => void
-    setError: (error: string | null) => void
     value: string
     setValue: (value: string) => void
     setCurrentPage: (page: number) => void
@@ -17,7 +16,7 @@ type PropsType = {
 }
 
 export const Header: FC<PropsType> = React.memo((props) => {
-        const {showResultByTitle, setError, value, setValue, setCurrentPage, setResult,} = props
+        const {showResultByTitle,value, setValue, setCurrentPage, setResult,} = props
 
         const onchangeHandler = useCallback((value: string) => {
             showResultByTitle(value)
@@ -30,7 +29,6 @@ export const Header: FC<PropsType> = React.memo((props) => {
                         <span className={s.logo}>Movie catalog</span>
                         <div className={s.input}>
                             <Input callBack={onchangeHandler}
-                                   setError={setError}
                                    value={value}
                                    setValue={setValue}
                                    setCurrentPage={setCurrentPage}

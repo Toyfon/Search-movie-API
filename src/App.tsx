@@ -43,7 +43,6 @@ export const App = () =>  {
            <Error error={error} setError={setError}/>
             <Header showResultByTitle={showResultByTitle}
                     setCurrentPage={setCurrentPage}
-                    setError={setError}
                     value={value}
                     setValue={setValue}
                     setResult={setResult}

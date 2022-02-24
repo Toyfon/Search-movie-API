@@ -1,26 +1,23 @@
-import React, {FC, useCallback} from "react"
+import React, {useCallback, useState} from "react"
 
 import s from './Header.module.css'
 
-import {Input} from "../Input/Input"
-import {MovieType} from "../../api/api"
+import {Input} from "../../Components/Input/Input"
 import {Profile} from "../Profile/Profile"
+import {fetchMovies, setCurrentTitle} from "../../bll/searchMovieSlice";
+import {useAppDispatch} from "../../hooks/typed-hooks";
 
 
-type PropsType = {
-    showResultByTitle: (value: string, page?: number) => void
-    value: string
-    setValue: (value: string) => void
-    setCurrentPage: (page: number) => void
-    setResult: (result: MovieType[]) => void
-}
+export const Header= React.memo(() => {
 
-export const Header: FC<PropsType> = React.memo((props) => {
-        const {showResultByTitle,value, setValue, setCurrentPage, setResult,} = props
+        const [value, setValue] = useState<string>('')
 
-        const onchangeHandler = useCallback((value: string) => {
-            showResultByTitle(value)
-        }, [showResultByTitle])
+        const dispatch = useAppDispatch()
+
+        const onchangeHandler = useCallback((title: string) => {
+            dispatch(fetchMovies({title}))
+            dispatch(setCurrentTitle(title))
+        }, [dispatch])
 
         return <header className={s.header}>
             <div className='container'>
@@ -31,8 +28,6 @@ export const Header: FC<PropsType> = React.memo((props) => {
                             <Input callBack={onchangeHandler}
                                    value={value}
                                    setValue={setValue}
-                                   setCurrentPage={setCurrentPage}
-                                   setResult={setResult}
                             />
                         </div>
                     </div>

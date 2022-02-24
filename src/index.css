@@ -23,6 +23,15 @@
 
 
 body {
-    margin: 0 ;
     font-family: var(--family);
+    margin: 0;
 }
+
+
+.container {
+    max-width: 1230px;
+    padding: 0 15px;
+    margin: 0 auto;
+    position: relative;
+}
+

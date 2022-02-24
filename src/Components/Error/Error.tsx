@@ -1,24 +1,27 @@
-import React, {FC, useEffect} from "react"
+import React, {useEffect} from "react"
 
 import s from "./Error.module.scss"
 import iconClose from '../../assets/img/closeIcon.svg'
+import {useAppDispatch, useTypedSelector} from "../../hooks/typed-hooks";
+import {setAppError} from "../../bll/appSlice";
+import {clearMoviesData} from "../../bll/searchMovieSlice";
 
-type PropsType = {
-    error: string | null
-    setError: (error: string | null) => void
-}
 
-export const Error: FC<PropsType> = React.memo((props) => {
-        const {error, setError} = props
+export const Error = React.memo(() => {
+
+        const error = useTypedSelector(state => state.app.error)
+        const dispatch = useAppDispatch()
 
         useEffect(() => {
             const timer = setTimeout(() => {
-                setError(null);
+                dispatch(setAppError(null))
             }, 4000);
+            dispatch(clearMoviesData())
             return () => clearTimeout(timer)
-        }, [error, setError])
 
-        const onHideErrorHandler = () => setError(null)
+        }, [error, dispatch])
+
+        const onHideErrorHandler = () => dispatch(setAppError(null))
 
         return (
             <div className={`${s.errorContainer} ${error && s.active}`}>

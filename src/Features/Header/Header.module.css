@@ -41,6 +41,10 @@
     transition: all 0.3s ease;
 }
 
+.input input:hover {
+    border: 1px solid;
+}
+
 @media (max-width: 600px) {
     .logo {
         display: none;

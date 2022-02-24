@@ -1,23 +1,22 @@
-import React, {FC, useCallback} from "react"
+import React, {useCallback} from "react"
+
+import {useAppDispatch, useTypedSelector} from "../../hooks/typed-hooks";
+import {fetchMovies, setCurrentPage} from "../../bll/searchMovieSlice";
+import {MovieType} from "../../api/api"
 
 import forwardArrow from '../../assets/img/icons8-forward-24.png'
 import backArrow from '../../assets/img/icons8-back-24.png'
-import {MovieType} from "../../api/api"
 import s from './Pagination.module.css'
 
 
-type Props = {
-    movieTotalCount: number
-    showResultByTitle: (value: string, page: number) => void
-    value: string
-    currentPage: number
-    setCurrentPage: (page: number) => void
-    movies: MovieType[]
-}
+export const Pagination = () => {
 
+    const movieTotalCount = useTypedSelector<number>(state => state.movies.totalResults)
+    const currentPage = useTypedSelector<number>(state => state.movies.currentPage)
+    const currentTitle = useTypedSelector<string>(state => state.movies.currentTitle)
+    const movies = useTypedSelector<MovieType[]>(state => state.movies.movies)
 
-export const Pagination: FC<Props> = (props) => {
-    const {movieTotalCount, showResultByTitle, value, currentPage, setCurrentPage, movies} = props
+    const dispatch = useAppDispatch()
 
     const moviesOnPage = 10
     let pages: number[] = []
@@ -45,9 +44,9 @@ export const Pagination: FC<Props> = (props) => {
     }
 
     const onChangeCurrentPage = useCallback((page: number) => {
-        setCurrentPage(page)
-        showResultByTitle(value, page)
-    }, [setCurrentPage, showResultByTitle, value])
+        dispatch(setCurrentPage(page))
+        dispatch(fetchMovies({title: currentTitle, page}))
+    }, [dispatch, currentTitle])
 
     const mappedPages = pages.map((el) => (
         <div className={currentPage === el ? s.selectedPage : s.pageNumber}
@@ -63,12 +62,16 @@ export const Pagination: FC<Props> = (props) => {
             <div className={s.paginator}>
                 <div className={s.pages}>
                     {currentPage !== 1 &&
-                    <span onClick={() => onChangeCurrentPage(currentPage - 1)}>
+                    <span
+                        onClick={() => onChangeCurrentPage(currentPage - 1)}
+                    >
                     <img src={backArrow} alt="back icon"/>
                 </span>}
                     {mappedPages}
                     {currentPage !== pagesCount &&
-                    <span onClick={() => onChangeCurrentPage(currentPage + 1)}>
+                    <span
+                        onClick={() => onChangeCurrentPage(currentPage + 1)}
+                    >
                         <img src={forwardArrow} alt="forward icon"/>
                     </span>}
                 </div>

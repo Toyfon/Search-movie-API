@@ -2,8 +2,8 @@ import {instance} from "./instance"
 
 const key = 'e061473e'
 export const API = {
-    searchFilmByTitle (title:string | undefined, page: number | undefined = 1) {
-        return instance.get<ResponseType>(`?apikey=${[key]}&s=${title}&page=${page}`)
+    searchFilmByTitle (title:string , page: number  = 1) {
+        return instance.get<FullFilledResponseType & RejectedResponseType>(`?apikey=${[key]}&s=${title}&page=${page}`)
     }
 }
 
@@ -16,9 +16,13 @@ export type MovieType = {
     imdbID: string
 }
 
-type ResponseType = {
+export type FullFilledResponseType = {
     Search: MovieType[]
-    Response: string
-    Error:string
+    Response: 'True' | 'False'
     totalResults: string
+}
+
+export type RejectedResponseType = {
+    Error:string
+    Response: string
 }

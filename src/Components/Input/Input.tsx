@@ -27,7 +27,7 @@ export const Input: FC<PropsType> = React.memo((props) => {
                    value={value}
                    onChange={changeHandler}
                    onKeyPress={onKeyPressHandler}
-                   placeholder={'search a movie'}
+                   placeholder='search a movie'
             />
         </>
     }

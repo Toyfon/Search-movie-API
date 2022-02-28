@@ -1,15 +1,16 @@
 import React, {useEffect} from "react"
 
-import s from "./Error.module.scss"
-import iconClose from '../../assets/img/closeIcon.svg'
 import {useAppDispatch, useTypedSelector} from "../../hooks/typed-hooks";
 import {setAppError} from "../../bll/appSlice";
 import {clearMoviesData} from "../../bll/searchMovieSlice";
 
+import s from "./Error.module.scss"
+import iconClose from '../../assets/img/closeIcon.svg'
+
 
 export const Error = React.memo(() => {
 
-        const error = useTypedSelector(state => state.app.error)
+        const error = useTypedSelector<string | null>(state => state.app.error)
         const dispatch = useAppDispatch()
 
         useEffect(() => {

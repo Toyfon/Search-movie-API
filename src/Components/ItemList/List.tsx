@@ -6,7 +6,8 @@ type ListPropsType<T> = {
     items: T[]
     renderItem: (item: T) => React.ReactNode
 }
-//
+
+
 export default function List<T>(props: ListPropsType<T>) {
     const {items, renderItem} = props
 

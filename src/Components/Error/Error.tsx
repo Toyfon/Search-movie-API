@@ -1,39 +1,37 @@
-import React, {useEffect} from "react"
+import { FC, memo, useEffect } from 'react';
 
-import {useAppDispatch, useTypedSelector} from "../../hooks/typed-hooks";
-import {setAppError} from "../../bll/appSlice";
-import {clearMoviesData} from "../../bll/searchMovieSlice";
+import s from './Error.module.scss';
 
-import s from "./Error.module.scss"
-import iconClose from '../../assets/img/closeIcon.svg'
+import iconClose from 'assets/img/closeIcon.svg';
+import { setAppError } from 'bll/appSlice';
+import { clearMoviesData } from 'bll/searchMovieSlice';
+import { useAppDispatch, useTypedSelector } from 'hooks/typed-hooks';
 
+export const Error: FC = memo(() => {
+  const error = useTypedSelector<string | null>(state => state.app.error);
+  const dispatch = useAppDispatch();
 
-export const Error = React.memo(() => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(setAppError(null));
+    }, 4000);
+    dispatch(clearMoviesData());
+    return () => clearTimeout(timer);
+  }, [error, dispatch]);
 
-        const error = useTypedSelector<string | null>(state => state.app.error)
-        const dispatch = useAppDispatch()
+  const onHideErrorHandler = (): void => {
+    dispatch(setAppError(null));
+  };
 
-        useEffect(() => {
-            const timer = setTimeout(() => {
-                dispatch(setAppError(null))
-            }, 4000);
-            dispatch(clearMoviesData())
-            return () => clearTimeout(timer)
-
-        }, [error, dispatch])
-
-        const onHideErrorHandler = () => dispatch(setAppError(null))
-
-        return (
-            <div className={`${s.errorContainer} ${error && s.active}`}>
-                <span className={s.message}>{error}</span>
-                <span
-                    role="presentation"
-                    onClick={onHideErrorHandler}
-                    style={{backgroundImage: `url(${iconClose})`}}
-                    className={s.close}
-                />
-            </div>
-        )
-    }
-)
+  return (
+    <div className={`${s.errorContainer} ${error && s.active}`}>
+      <span className={s.message}>{error}</span>
+      <span
+        role="presentation"
+        onClick={onHideErrorHandler}
+        style={{ backgroundImage: `url(${iconClose})` }}
+        className={s.close}
+      />
+    </div>
+  );
+});

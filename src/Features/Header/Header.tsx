@@ -1,39 +1,37 @@
-import React, {useCallback, useState} from "react"
+import React, { memo, useCallback, useState } from 'react';
 
-import s from './Header.module.css'
+import { fetchMovies, setCurrentTitle } from 'bll/searchMovieSlice';
+import { Input } from 'Components/Input/Input';
+import s from 'Features/Header/Header.module.css';
+import { Profile } from 'Features/Profile/Profile';
+import { useAppDispatch } from 'hooks/typed-hooks';
 
-import {Input} from "../../Components/Input/Input"
-import {Profile} from "../Profile/Profile"
-import {fetchMovies, setCurrentTitle} from "../../bll/searchMovieSlice";
-import {useAppDispatch} from "../../hooks/typed-hooks";
+export const Header = memo(() => {
+  const [value, setValue] = useState<string>('');
 
+  const dispatch = useAppDispatch();
 
-export const Header= React.memo(() => {
+  const onchangeHandler = useCallback(
+    (title: string) => {
+      dispatch(fetchMovies({ title }));
+      dispatch(setCurrentTitle(title));
+    },
+    [dispatch],
+  );
 
-        const [value, setValue] = useState<string>('')
-
-        const dispatch = useAppDispatch()
-
-        const onchangeHandler = useCallback((title: string) => {
-            dispatch(fetchMovies({title}))
-            dispatch(setCurrentTitle(title))
-        }, [dispatch])
-
-        return <header className={s.header}>
-            <div className='container'>
-                <div className={s.headerWrapper}>
-                    <div className={s.search}>
-                        <span className={s.logo}>Movie catalog</span>
-                        <div className={s.input}>
-                            <Input callBack={onchangeHandler}
-                                   value={value}
-                                   setValue={setValue}
-                            />
-                        </div>
-                    </div>
-                    <Profile userName='Vasily'/>
-                </div>
+  return (
+    <header className={s.header}>
+      <div className="container">
+        <div className={s.headerWrapper}>
+          <div className={s.search}>
+            <span className={s.logo}>Movie catalog</span>
+            <div className={s.input}>
+              <Input callBack={onchangeHandler} value={value} setValue={setValue} />
             </div>
-        </header>
-    }
-)
+          </div>
+          <Profile userName="Vasily" />
+        </div>
+      </div>
+    </header>
+  );
+});

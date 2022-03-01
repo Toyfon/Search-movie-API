@@ -1,22 +1,21 @@
-import React from "react"
+import { memo } from 'react';
 
-import {SearchInfo} from "../SearchInfo/SearchInfo"
-import {MainContent} from "../MainContent/MainContent"
-import {useTypedSelector} from "../../hooks/typed-hooks";
+import { MainContent } from '../MainContent/MainContent';
+import { SearchInfo } from '../SearchInfo/SearchInfo';
 
+import { useTypedSelector } from 'hooks/typed-hooks';
 
-export const Main = React.memo(() => {
+export const Main = memo(() => {
+  const error = useTypedSelector(state => state.app.error);
 
-        const error = useTypedSelector(state => state.app.error)
-
-        return (<>
-                {!error &&
-                <div className='container'>
-                    <SearchInfo/>
-                    <MainContent/>
-                </div>
-                }
-            </>
-        )
-    }
-)
+  return (
+    <div>
+      {!error && (
+        <div className="container">
+          <SearchInfo />
+          <MainContent />
+        </div>
+      )}
+    </div>
+  );
+});

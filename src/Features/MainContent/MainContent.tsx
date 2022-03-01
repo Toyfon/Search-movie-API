@@ -1,20 +1,21 @@
-import React from "react"
+import { memo } from 'react';
 
-import {Pagination} from "../Pagination/Pagination"
-import {MovieType} from "../../api/api"
-import {Item} from "../../Components/Item/Item";
-import List from "../../Components/ItemList/List";
-import {useTypedSelector} from "../../hooks/typed-hooks";
+import { MovieType } from 'api/api';
+import { Item } from 'Components/Item/Item';
+import { List } from 'Components/ItemList/List';
+import { Pagination } from 'Features/Pagination/Pagination';
+import { useTypedSelector } from 'hooks/typed-hooks';
 
+export const MainContent = memo(() => {
+  const movies = useTypedSelector<MovieType[]>(state => state.movies.movies);
 
-export const MainContent = React.memo(() => {
-
-    const movies = useTypedSelector<MovieType[]>(state => state.movies.movies)
-
-        return <>
-            <List items={movies}
-                  renderItem={(movie: MovieType) => <Item movie={movie} key={movie.Title}/>}/>
-            <Pagination/>
-        </>
-    }
-)
+  return (
+    <>
+      <List
+        items={movies}
+        renderItem={(movie: MovieType) => <Item movie={movie} key={movie.Title} />}
+      />
+      <Pagination />
+    </>
+  );
+});

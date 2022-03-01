@@ -1,28 +1,21 @@
-import React from 'react'
+import React, { FC } from 'react';
 
-import {Preloader} from "./Components/Preloader/Preloader"
-import {Header} from "./Features/Header/Header"
-import {Main} from "./Features/Main/Main"
-import {Error} from "./Components/Error/Error"
-import {useTypedSelector} from "./hooks/typed-hooks";
-import {StatusType} from "./bll/appSlice";
+import './App.css';
+import { StatusType } from 'bll/appSlice';
+import { Error } from 'Components/Error/Error';
+import { Preloader } from 'Components/Preloader/Preloader';
+import { Header } from 'Features/Header/Header';
+import { Main } from 'Features/Main/Main';
+import { useTypedSelector } from 'hooks/typed-hooks';
 
-import './App.css'
+export const App: FC = () => {
+  const status = useTypedSelector<StatusType>(state => state.app.status);
 
-export const App = () => {
-
-    const status = useTypedSelector<StatusType>(state => state.app.status)
-
-    return (
-        <div className="App" style={{position: 'relative'}}>
-            <Error/>
-            <Header/>
-            {status === 'loading' ? (<Preloader/>) : (
-                <Main/>
-            )}
-        </div>
-    )
-}
-
-
-
+  return (
+    <div className="App" style={{ position: 'relative' }}>
+      <Error />
+      <Header />
+      {status === 'loading' ? <Preloader /> : <Main />}
+    </div>
+  );
+};

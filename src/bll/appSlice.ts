@@ -1,34 +1,32 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {fetchMovies} from "./searchMovieSlice";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { fetchFailed } from './searchMovieSlice';
 
-const appSlice= createSlice({
-    name:'app',
-    initialState:{
-        error: null as string | null,
-        status: 'idle' as StatusType
+const appSlice = createSlice({
+  name: 'app',
+  initialState: {
+    error: null as string | null,
+    status: 'idle' as StatusType,
+  },
+  reducers: {
+    setAppStatus: (state, action: PayloadAction<StatusType>) => {
+      state.status = action.payload;
     },
-    reducers:{
-        setAppStatus: (state, action: PayloadAction<StatusType>) => {
-            state.status = action.payload
-        },
-        setAppError: (state, action: PayloadAction<string | null>) => {
-            state.error = action.payload
-        }
+    setAppError: (state, { payload }: PayloadAction<string | null>) => {
+      state.error = payload;
     },
-    extraReducers: builder =>  {
-        builder.addCase(fetchMovies.rejected, (state, action) => {
-            if(action.payload)
-            state.error = action.payload.Error
-        })
-    }
-})
+  },
+  extraReducers: builder => {
+    builder.addCase(fetchFailed, (state, { payload }) => {
+      if (payload) state.error = payload.Error;
+    });
+  },
+});
 
-//actions
-export const {setAppStatus, setAppError} = appSlice.actions
+// actions
+export const { setAppStatus, setAppError } = appSlice.actions;
 
-//types
-export type StatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+// types
+export type StatusType = 'idle' | 'loading' | 'succeeded' | 'failed';
 
-
-export default appSlice.reducer
+export default appSlice.reducer;

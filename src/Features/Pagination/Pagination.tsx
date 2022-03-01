@@ -1,19 +1,26 @@
 import { FC, useCallback } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import backArrow from '../../assets/img/icons8-back-24.png';
 import forwardArrow from '../../assets/img/icons8-forward-24.png';
 
 import s from './Pagination.module.css';
 
-import { MovieType } from 'api/api';
 import { fetchMovies, setCurrentPage } from 'bll/searchMovieSlice';
-import { useAppDispatch, useTypedSelector } from 'hooks/typed-hooks';
+import {
+  getCurrentPage,
+  getCurrentTitle,
+  getMovies,
+  getMovieTotalCount,
+} from 'bll/selectors/selectors';
+import { useAppDispatch } from 'hooks/typed-hooks';
 
 export const Pagination: FC = () => {
-  const movieTotalCount = useTypedSelector<number>(state => state.movies.totalResults);
-  const currentPage = useTypedSelector<number>(state => state.movies.currentPage);
-  const currentTitle = useTypedSelector<string>(state => state.movies.currentTitle);
-  const movies = useTypedSelector<MovieType[]>(state => state.movies.movies);
+  const movieTotalCount = useSelector(getMovieTotalCount);
+  const currentPage = useSelector(getCurrentPage);
+  const currentTitle = useSelector(getCurrentTitle);
+  const movies = useSelector(getMovies);
 
   const dispatch = useAppDispatch();
 

@@ -6,9 +6,7 @@ type PropsType = {
   setValue: (value: string) => void;
 };
 
-export const Input: FC<PropsType> = memo(props => {
-  const { callBack, value, setValue } = props;
-
+export const Input: FC<PropsType> = memo(({ callBack, value, setValue }) => {
   const changeHandler = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       setValue(e.currentTarget.value);

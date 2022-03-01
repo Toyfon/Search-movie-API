@@ -1,12 +1,13 @@
 import { FC } from 'react';
 
-import { MovieType } from 'api/api';
-import { useTypedSelector } from 'hooks/typed-hooks';
+import { useSelector } from 'react-redux';
+
+import { getCurrentTitle, getMovies, getMovieTotalCount } from 'bll/selectors/selectors';
 
 export const SearchInfo: FC = () => {
-  const movies = useTypedSelector<MovieType[]>(state => state.movies.movies);
-  const currentTitle = useTypedSelector<string>(state => state.movies.currentTitle);
-  const movieTotalCount = useTypedSelector<number>(state => state.movies.totalResults);
+  const movies = useSelector(getMovies);
+  const currentTitle = useSelector(getCurrentTitle);
+  const movieTotalCount = useSelector(getMovieTotalCount);
 
   return (
     <div className="container">

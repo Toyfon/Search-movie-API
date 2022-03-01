@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 
 import { fetchMovies, setCurrentTitle } from 'bll/searchMovieSlice';
 import { Input } from 'Components/Input/Input';

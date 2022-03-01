@@ -1,13 +1,15 @@
 import { memo } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import { MovieType } from 'api/api';
+import { getMovies } from 'bll/selectors/selectors';
 import { Item } from 'Components/Item/Item';
 import { List } from 'Components/ItemList/List';
 import { Pagination } from 'Features/Pagination/Pagination';
-import { useTypedSelector } from 'hooks/typed-hooks';
 
 export const MainContent = memo(() => {
-  const movies = useTypedSelector<MovieType[]>(state => state.movies.movies);
+  const movies = useSelector(getMovies);
 
   return (
     <>

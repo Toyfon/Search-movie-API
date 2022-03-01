@@ -1,12 +1,14 @@
 import { memo } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import { MainContent } from '../MainContent/MainContent';
 import { SearchInfo } from '../SearchInfo/SearchInfo';
 
-import { useTypedSelector } from 'hooks/typed-hooks';
+import { getError } from 'bll/selectors/selectors';
 
 export const Main = memo(() => {
-  const error = useTypedSelector(state => state.app.error);
+  const error = useSelector(getError);
 
   return (
     <div>

@@ -1,14 +1,17 @@
 import { FC, memo, useEffect } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import s from './Error.module.scss';
 
 import iconClose from 'assets/img/closeIcon.svg';
 import { setAppError } from 'bll/appSlice';
 import { clearMoviesData } from 'bll/searchMovieSlice';
-import { useAppDispatch, useTypedSelector } from 'hooks/typed-hooks';
+import { getError } from 'bll/selectors/selectors';
+import { useAppDispatch } from 'hooks/typed-hooks';
 
 export const Error: FC = memo(() => {
-  const error = useTypedSelector<string | null>(state => state.app.error);
+  const error = useSelector(getError);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

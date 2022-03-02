@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux';
 import { MainContent } from '../MainContent/MainContent';
 import { SearchInfo } from '../SearchInfo/SearchInfo';
 
-import { getError } from 'bll/selectors/selectors';
+import { selectError } from 'bll/selectors/selectors';
 
 export const Main = memo(() => {
-  const error = useSelector(getError);
+  const error = useSelector(selectError);
 
   return (
     <div>

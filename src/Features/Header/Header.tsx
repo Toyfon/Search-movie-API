@@ -11,7 +11,7 @@ export const Header = memo(() => {
 
   const dispatch = useAppDispatch();
 
-  const onchangeHandler = useCallback(
+  const handleTitleChange = useCallback(
     (title: string) => {
       dispatch(fetchMovies({ title }));
       dispatch(setCurrentTitle(title));
@@ -26,7 +26,7 @@ export const Header = memo(() => {
           <div className={s.search}>
             <span className={s.logo}>Movie catalog</span>
             <div className={s.input}>
-              <Input callBack={onchangeHandler} value={value} setValue={setValue} />
+              <Input onChange={handleTitleChange} value={value} setValue={setValue} />
             </div>
           </div>
           <Profile userName="Vasily" />

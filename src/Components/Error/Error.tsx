@@ -7,11 +7,11 @@ import s from './Error.module.scss';
 import iconClose from 'assets/img/closeIcon.svg';
 import { setAppError } from 'bll/appSlice';
 import { clearMoviesData } from 'bll/searchMovieSlice';
-import { getError } from 'bll/selectors/selectors';
+import { selectError } from 'bll/selectors/selectors';
 import { useAppDispatch } from 'hooks/typed-hooks';
 
 export const Error: FC = memo(() => {
-  const error = useSelector(getError);
+  const error = useSelector(selectError);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

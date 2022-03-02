@@ -9,18 +9,18 @@ import s from './Pagination.module.css';
 
 import { fetchMovies, setCurrentPage } from 'bll/searchMovieSlice';
 import {
-  getCurrentPage,
-  getCurrentTitle,
-  getMovies,
-  getMovieTotalCount,
+  selectCurrentPage,
+  selectCurrentTitle,
+  selectMovies,
+  selectMovieTotalCount,
 } from 'bll/selectors/selectors';
 import { useAppDispatch } from 'hooks/typed-hooks';
 
 export const Pagination: FC = () => {
-  const movieTotalCount = useSelector(getMovieTotalCount);
-  const currentPage = useSelector(getCurrentPage);
-  const currentTitle = useSelector(getCurrentTitle);
-  const movies = useSelector(getMovies);
+  const movieTotalCount = useSelector(selectMovieTotalCount);
+  const currentPage = useSelector(selectCurrentPage);
+  const currentTitle = useSelector(selectCurrentTitle);
+  const movies = useSelector(selectMovies);
 
   const dispatch = useAppDispatch();
 

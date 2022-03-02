@@ -2,12 +2,16 @@ import { FC } from 'react';
 
 import { useSelector } from 'react-redux';
 
-import { getCurrentTitle, getMovies, getMovieTotalCount } from 'bll/selectors/selectors';
+import {
+  selectCurrentTitle,
+  selectMovies,
+  selectMovieTotalCount,
+} from 'bll/selectors/selectors';
 
 export const SearchInfo: FC = () => {
-  const movies = useSelector(getMovies);
-  const currentTitle = useSelector(getCurrentTitle);
-  const movieTotalCount = useSelector(getMovieTotalCount);
+  const movies = useSelector(selectMovies);
+  const currentTitle = useSelector(selectCurrentTitle);
+  const movieTotalCount = useSelector(selectMovieTotalCount);
 
   return (
     <div className="container">

@@ -1,27 +1,21 @@
-import { ChangeEvent, FC, KeyboardEvent, memo, useCallback } from 'react';
+import { ChangeEvent, FC, KeyboardEvent, memo } from 'react';
 
 type PropsType = {
-  callBack: (value: string) => void;
+  onChange: (value: string) => void;
   value: string;
   setValue: (value: string) => void;
 };
 
-export const Input: FC<PropsType> = memo(({ callBack, value, setValue }) => {
-  const changeHandler = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setValue(e.currentTarget.value);
-    },
-    [setValue],
-  );
+export const Input: FC<PropsType> = memo(({ onChange, value, setValue }) => {
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
+    setValue(e.currentTarget.value);
+  };
 
-  const onKeyPressHandler = useCallback(
-    (e: KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === 'Enter') {
-        callBack(e.currentTarget.value);
-      }
-    },
-    [callBack],
-  );
+  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === 'Enter') {
+      onChange(e.currentTarget.value);
+    }
+  };
 
   return (
     <input

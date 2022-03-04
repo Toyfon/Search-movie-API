@@ -6,7 +6,7 @@ import { MovieType } from 'api/api';
 import { selectMovies } from 'bll/selectors/selectors';
 import { Item } from 'Components/Item/Item';
 import { List } from 'Components/ItemList/List';
-import { Pagination } from 'Features/Pagination/Pagination';
+import { PaginationWithHooks } from 'Features/Pagination/PaginationWithHooks';
 
 export const MainContent = memo(() => {
   const movies = useSelector(selectMovies);
@@ -17,7 +17,8 @@ export const MainContent = memo(() => {
         items={movies}
         renderItem={(movie: MovieType) => <Item movie={movie} key={movie.Title} />}
       />
-      <Pagination />
+      {/* <Pagination /> */}
+      <PaginationWithHooks />
     </>
   );
 });
